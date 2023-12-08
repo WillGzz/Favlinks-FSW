@@ -1,0 +1,35 @@
+*{
+margin-left: 20px;
+ font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+ 
+}
+
+#submit-button, #delete-button{
+color: white;
+background-color:  rgb(0, 85, 255);;
+border-color: rgb(0, 85, 255);
+
+}
+
+h1, p{
+  margin-left: 35px;
+}
+
+#th-name, #row-name{
+  padding-left: 15px;
+
+}
+#th-URL, #th-remove, #row-URL{
+  padding-left: 300px;
+
+}
+ #delete-button{
+ margin-left:  300px;
+ }
+
+input[type="text"] {
+  width: 70%; /* Full width */
+  height: 30px; /* Adjust as needed */
+}
+
+
