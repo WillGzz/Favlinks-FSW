@@ -1,5 +1,5 @@
 const Pool = require("pg").Pool;
-
+// pool is used to establish a connection to the PostgreSQL server and create a pool of connections that can be reused by multiple clients.
 const pool = new Pool({
   user: "username",
   host: "localhost",
@@ -10,7 +10,7 @@ const pool = new Pool({
  //request, response
 
   //Create links
-  const createLinks = (req, res) => {
+  const createLinks = (request, response) => {
     const { name, url } = req.body;
   
     pool.query(
@@ -26,22 +26,51 @@ const pool = new Pool({
 
 
 //Retrieve information from the table
- const getLinks = (req, res) => {
+ const getLinks = (request, response) => {
     pool.query('SELECT * FROM favlinks ORDER BY id ASC', 
     
     (error, result) => {
     if (error) {
     throw error
     }
-    res.status(200).json(result.rows)
+    response.status(200).json(result.rows)
     })
     }
 
+//Update information from the table
+const updateLinks = (request, response) => {
+    const id = parseInt(request.params.id)
+    const { name, url } = request.body
+  
+    pool.query(
+      'UPDATE favlinks SET name = $1, url = $2 WHERE id = $3',
+      [name, url, id],
+      (error, results) => {
+        if (error) {
+          throw error
+        }
+        response.status(200).send(`User modified with ID: ${id}`)
+      }
+    )
+  }
 
+  //Delete information from the table 
+  const deleteLinks = (request, response) => {
+  const id = parseInt(request.params.id)
+  
+    pool.query('DELETE FROM favlinks WHERE id = $2', [id], (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send(`User deleted with ID: ${id}`)
+    })
+  }
   
 
-
+//Allow us to export the functions we made into other files, in this case its index.js
 module.exports = {
+    createLinks,
     getLinks,
-    createLinks
+    updateLinks,
+    deleteLinks
     }
