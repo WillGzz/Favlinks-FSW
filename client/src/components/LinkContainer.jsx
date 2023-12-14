@@ -9,7 +9,7 @@ function LinkContainer() {
         try {
             // make a request to our server to delete the link
             const response = await fetch(`/api/links/${id}`, {
-                method: 'DELETE',
+                method:'DELETE',
             });
 
             // check if the request was successful (status code 2xx)
@@ -24,6 +24,12 @@ function LinkContainer() {
             console.error(error);
         }
     };
+    const editLink = (id) => {
+        const newName = window.prompt('Enter a new name:');
+        const newURL = window.prompt('Enter the new URL:');
+        handleUpdate(id, { name: newName, URL: newURL });
+    };
+
 
     const handleUpdate = async (id, updatedLink) => {
         try {
@@ -76,6 +82,8 @@ function LinkContainer() {
         }
     };
 
+
+
     const getLinks = async () => {
         try {
             // make a request to our server to get the links
@@ -96,7 +104,7 @@ function LinkContainer() {
         <div>
             <h1>My Favorite Links</h1>
             <p>Add a new link with a name and URL to the table!</p>
-            <Table linkData={favLinks} removeLink={handleRemove} />
+            <Table linkData={favLinks} removeLink={handleRemove} editLink={editLink} />
             <h1>Add New</h1>
             <Form handleSubmit={handleSubmit} />
         </div>
