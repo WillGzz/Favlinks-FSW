@@ -1,17 +1,96 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from './Table';
 import Form from './Form';
 
 function LinkContainer() {
     const [favLinks, setFavLinks] = useState([]);
 
-    const handleRemove = (index) => {
-        setFavLinks(favLinks.filter((_, i) => i !== index));
-    }
+    const handleRemove = async (id) => {
+        try {
+            // make a request to our server to delete the link
+            const response = await fetch(`/api/links/${id}`, {
+                method: 'DELETE',
+            });
 
-    const handleSubmit = (favLink) => {
-        setFavLinks([...favLinks, favLink]);
-    }
+            // check if the request was successful (status code 2xx)
+            if (response.ok) {
+                // remove the link from the state
+                setFavLinks(favLinks.filter(link => link.id !== id));
+            } else {
+                // handle error if the request was not successful
+                console.error('Failed to delete link');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleUpdate = async (id, updatedLink) => {
+        try {
+            // make a request to our server to update the link
+            const response = await fetch(`/api/links/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedLink),
+            });
+    
+    
+            if (response.ok) {
+                const updatedLink = await response.json();
+                // update the state with the updated link
+                setFavLinks(favLinks.map(link => link.id === id ? updatedLink : link));
+            } else {
+                // handle error if the request was not successful
+                console.error('Failed to update link');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
+    
+    const handleSubmit = async (favLink) => {
+        try {
+            // make a request to our server to add the new link
+            const response = await fetch('/api/links', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(favLink),
+            });
+
+            // check if the request was successful (status code 2xx)
+            if (response.ok) {
+                const newLink = await response.json();
+                // update the state with the new link
+                setFavLinks([...favLinks, newLink]);
+            } else {
+                // handle error if the request was not successful
+                console.error('Failed to add link');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const getLinks = async () => {
+        try {
+            // make a request to our server to get the links
+            const response = await fetch('/api/links');
+            // convert the response to json
+            const data = await response.json();
+            setFavLinks(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        getLinks();
+    }, []);
 
     return (
         <div>
@@ -21,7 +100,7 @@ function LinkContainer() {
             <h1>Add New</h1>
             <Form handleSubmit={handleSubmit} />
         </div>
-    )
+    );
 }
 
 export default LinkContainer;

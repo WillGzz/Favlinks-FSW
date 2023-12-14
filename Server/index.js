@@ -1,6 +1,6 @@
 const express = require('express')
 const db = require('./db')
-const cors = require('cors')
+//const cors = require('cors') if the server is hosting the client side we dont use cors
 const path = require('path')
 
 const app = express();
@@ -15,7 +15,7 @@ const clientPath = path.resolve(__dirname, '../client/dist')
 //Create a new route that serves up the static files in your client folder
 app.use(express.static(clientPath))
 
-app.use(cors())
+//app.use(cors())
 
 
 app.get('/', (req, res) => {
@@ -28,10 +28,12 @@ app.get('/', (req, res) => {
  app.listen(PORT, () => {
      console.log(`Server is live on port ${PORT}`)
         })
+        
 //CRUD APPLICATION
-app.get('/api/links', db.getLinks)
-app.post('/api/links', db.createLinks)
-app.put('/users/:id', db.updateLinks)
-app.delete('/users/:id', db.deleteLinks)
+app.get('/api/links', db.getLinks);
+app.post('/api/links', db.createLinks);
+app.put('/api/links/:id', db.updateLinks); 
+app.delete('/api/links/:id', db.deleteLinks); 
+
      
         

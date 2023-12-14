@@ -3,7 +3,7 @@ const Pool = require("pg").Pool;
 const pool = new Pool({
   user: "username",
   host: "localhost",
-  database: "favlinks",
+  database: "linksapi",
   password: "password",
   port: 5432,
 });
@@ -11,7 +11,7 @@ const pool = new Pool({
 
   //Create links
   const createLinks = (request, response) => {
-    const { name, url } = req.body;
+    const { name, url } = request.body;
   
     pool.query(
       "INSERT INTO favlinks (name, url) VALUES ($1, $2) RETURNING *", [name, url],
@@ -49,7 +49,7 @@ const updateLinks = (request, response) => {
         if (error) {
           throw error
         }
-        response.status(200).send(`User modified with ID: ${id}`)
+        response.status(200).send(`Link modified with ID: ${id}`)
       }
     )
   }
@@ -58,7 +58,7 @@ const updateLinks = (request, response) => {
   const deleteLinks = (request, response) => {
   const id = parseInt(request.params.id)
   
-    pool.query('DELETE FROM favlinks WHERE id = $2', [id], (error, results) => {
+    pool.query('DELETE FROM favlinks WHERE id = $1', [id], (error, results) => {
       if (error) {
         throw error
       }
