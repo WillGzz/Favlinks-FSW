@@ -17,6 +17,7 @@ app.use(express.static(clientPath))
 
 //app.use(cors())
 
+app.use(express.json());
 
 app.get('/', (req, res) => {
     // we'll do some stuff here

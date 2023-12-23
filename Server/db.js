@@ -38,21 +38,22 @@ const pool = new Pool({
     }
 
 //Update information from the table
-const updateLinks = (request, response) => {
-    const id = parseInt(request.params.id)
-    const { name, url } = request.body
-  
-    pool.query(
-      'UPDATE favlinks SET name = $1, url = $2 WHERE id = $3',
-      [name, url, id],
-      (error, results) => {
-        if (error) {
-          throw error
-        }
-        response.status(200).send(`Link modified with ID: ${id}`)
+   const updateLinks = (request, response) => {
+  const id = parseInt(request.params.id)
+  const { name, url } = request.body
+
+  pool.query(
+    'UPDATE favlinks SET name = $1, url = $2 WHERE id = $3',
+    [name, url, id],
+    (error, results) => {
+      if (error) {
+        throw error
       }
-    )
-  }
+      response.status(200).json({ message: `Link modified with ID: ${id}` });
+    }
+  )
+}
+
 
   //Delete information from the table 
   const deleteLinks = (request, response) => {

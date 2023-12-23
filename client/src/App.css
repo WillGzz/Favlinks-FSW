@@ -3,11 +3,14 @@ margin-left: 20px;
  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
  
 }
-
+body{
+  max-width: 1130px;
+}
 #submit-button, #delete-button, .edit-button{
 color: white;
 background-color:  rgb(0, 85, 255);;
 border-color: rgb(0, 85, 255);
+cursor: pointer;
 
 }
 

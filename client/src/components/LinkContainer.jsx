@@ -27,7 +27,7 @@ function LinkContainer() {
     const editLink = (id) => {
         const newName = window.prompt('Enter a new name:');
         const newURL = window.prompt('Enter the new URL:');
-        handleUpdate(id, { name: newName, URL: newURL });
+        handleUpdate(id, { name: newName, url: newURL });
     };
 
 
@@ -46,7 +46,10 @@ function LinkContainer() {
             if (response.ok) {
                 const updatedLink = await response.json();
                 // update the state with the updated link
-                setFavLinks(favLinks.map(link => link.id === id ? updatedLink : link));
+              setFavLinks(favLinks.map(link => link.id === id ? updatedLink : link));
+              console.log(favLinks);
+              getLinks();
+              
             } else {
                 // handle error if the request was not successful
                 console.error('Failed to update link');
@@ -55,7 +58,6 @@ function LinkContainer() {
             console.error(error);
         }
     };
-    
     
     const handleSubmit = async (favLink) => {
         try {
@@ -67,12 +69,11 @@ function LinkContainer() {
                 },
                 body: JSON.stringify(favLink),
             });
-
+    
             // check if the request was successful (status code 2xx)
             if (response.ok) {
-                const newLink = await response.json();
-                // update the state with the new link
-                setFavLinks([...favLinks, newLink]);
+                // refetch the links
+                getLinks();
             } else {
                 // handle error if the request was not successful
                 console.error('Failed to add link');
@@ -81,7 +82,7 @@ function LinkContainer() {
             console.error(error);
         }
     };
-
+    
 
 
     const getLinks = async () => {
