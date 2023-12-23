@@ -26,9 +26,9 @@ app.get('/', (req, res) => {
 
     //this command allow us to start the server node server/index.js
 
- app.listen(PORT, () => {
-     console.log(`Server is live on port ${PORT}`)
-        })
+ //app.listen(PORT, () => {
+   //  console.log(`Server is live on port ${PORT}`)
+     //   })
         
 //CRUD APPLICATION
 app.get('/api/links', db.getLinks);
@@ -36,5 +36,7 @@ app.post('/api/links', db.createLinks);
 app.put('/api/links/:id', db.updateLinks); 
 app.delete('/api/links/:id', db.deleteLinks); 
 
+
+module.exports = app;
      
         
