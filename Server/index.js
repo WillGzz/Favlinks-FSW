@@ -1,6 +1,7 @@
+/*
 const express = require('express')
 const db = require('./db')
-const cors = require('cors')
+//const cors = require('cors')
 const path = require('path')
 
 const app = express();
@@ -20,7 +21,7 @@ app.use(cors())
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    // we'll do some stuff here
+  
     res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'))
     })
 
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is live on port ${PORT}`)
     })
+    
         
 //CRUD APPLICATION
 app.get('/api/links', db.getLinks);
@@ -39,4 +41,4 @@ app.delete('/api/links/:id', db.deleteLinks);
 
 module.exports = app;
      
-        
+   */     

@@ -1,3 +1,7 @@
+require('dotenv').config();  // we import the env variables and apply them
+//we use environment variables to keep sensitive information hidden
+//we also set the env variables on the vercel settings, this file is not included in our commit
+
 const Pool = require("pg").Pool;
 // pool is used to establish a connection to the PostgreSQL server and create a pool of connections that can be reused by multiple clients.
 const pool = new Pool({
@@ -76,11 +80,13 @@ const pool = new Pool({
     })
   }
   
+  
 
 //Allow us to export the functions we made into other files, in this case its index.js
 module.exports = {
     createLinks,
     getLinks,
     updateLinks,
-    deleteLinks
+    deleteLinks,
+    Pool
     }
