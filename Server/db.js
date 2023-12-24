@@ -1,12 +1,21 @@
 const Pool = require("pg").Pool;
 // pool is used to establish a connection to the PostgreSQL server and create a pool of connections that can be reused by multiple clients.
 const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
+/*
+const pool = new Pool({
   user: "username",
   host: "localhost",
   database: "linksapi",
   password: "password",
   port: 5432,
 });
+*/
  //request, response
 
   //Create links
