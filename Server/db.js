@@ -1,9 +1,9 @@
-require('dotenv').config();  // we import the env variables and apply them
+//require('.env').config();  // we import the env variables and apply them
 //we use environment variables to keep sensitive information hidden
 //we also set the env variables on the vercel settings, this file is not included in our commit
 
 const Pool = require("pg").Pool;
-// pool is used to establish a connection to the PostgreSQL server and create a pool of connections that can be reused by multiple clients.
+/* pool is used to establish a connection to the PostgreSQL server and create a pool of connections that can be reused by multiple clients.
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -11,7 +11,7 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
 });
-/*
+*/
 const pool = new Pool({
   user: "username",
   host: "localhost",
@@ -19,7 +19,7 @@ const pool = new Pool({
   password: "password",
   port: 5432,
 });
-*/
+
  //request, response
 
   //Create links

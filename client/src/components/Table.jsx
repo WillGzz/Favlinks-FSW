@@ -18,7 +18,7 @@ const TableBody = (props) => {
         <tr key={row.id}>
             <td id="row-name">{row.name}</td>
             <td id="row-URL">
-                <a href={row.url}>{row.url}</a>
+                <a href={row.url} target="_blank">{row.url}</a>
             </td>
             <td>
                 <button id="delete-button" onClick={() => props.removeLink(row.id)}>

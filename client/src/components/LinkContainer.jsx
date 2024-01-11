@@ -5,10 +5,10 @@ import Form from './Form';
 function LinkContainer() {
     const [favLinks, setFavLinks] = useState([]);
 
-    const handleRemove = async (id) => {
+    const handleRemove = async (id) => { //asynch - return promise to remove id
         try {
             // make a request to our server to delete the link
-            const response = await fetch(`/api/links/${id}`, {
+            const response = await fetch(`/api/links/${id}`, { // await - makes asynch function wait for promisr
                 method:'DELETE',
             });
 

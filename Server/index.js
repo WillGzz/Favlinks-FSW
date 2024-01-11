@@ -1,4 +1,4 @@
-/*
+
 const express = require('express')
 const db = require('./db')
 //const cors = require('cors')
@@ -16,7 +16,7 @@ const clientPath = path.resolve(__dirname, '../client/dist')
 //Create a new route that serves up the static files in your client folder
 app.use(express.static(clientPath))
 
-app.use(cors())
+//app.use(cors())
 
 app.use(express.json());
 
@@ -41,4 +41,4 @@ app.delete('/api/links/:id', db.deleteLinks);
 
 module.exports = app;
      
-   */     
+  
