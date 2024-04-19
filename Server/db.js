@@ -1,4 +1,4 @@
-require('dotenv').config();  //, dotenv is the module that loads these variables into the Node.js application, so we need to install it
+  //, dotenv is the module that loads these variables into the Node.js application, so we need to install it
 //we use environment variables to keep sensitive information hidden
 //we also set the env variables on the vercel settings, this file is not included in our commit
 
